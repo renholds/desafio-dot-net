@@ -18,11 +18,13 @@ Criar um site para consultar a API de Filmes e trazer os filmes enviados pelo en
 ### **Essencial** ##
 * IDE Utilizada deve ser o Visual Studio Community ou Visual Studio Code
 * O projeto deve ser estruturado em camadas
+* O projeto WEB deve ser feito em MVC
+* Implementar em .Net Core e C#
 
 ### **Desejável** ###
 
 * Bibliotecas de terceiros para reduzir o boilerplate
-* Arquitetura onion ou similares
+* Arquitetura onion, ou similares
 
 ### **Sugestões** ###
 
@@ -34,6 +36,7 @@ Nesta seção sugerimos algumas bibliotecas para o uso, mas fique à vontade par
 
 ### **OBS** ###
 
+Para realizar chamadas a API é necessário se cadastrar no site (https://www.themoviedb.org/documentation/api) e gerar uma chave.
 A foto das telas de mockup são só um guia, fique a vontade para usar o padrão de usabilidade da sua escolha.
 
 ### **Etapas para submissão** ###
