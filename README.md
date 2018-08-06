@@ -17,7 +17,7 @@ Criar um site para consultar a API de Filmes e trazer os filmes enviados pelo en
 
 ### **Essencial** ##
 * IDE Utilizada deve ser o Visual Studio Community ou Visual Studio Code
-* O projeto deve ser estruturado em camadas
+* O projeto deve ser estruturado em camadas (onion architecture)
 * O projeto WEB deve ser feito em MVC
 * Implementar em .Net Core e C#
 
