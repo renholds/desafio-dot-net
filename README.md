@@ -2,8 +2,8 @@
 
 Criar um site para consultar a API de Filmes e trazer os filmes enviados pelo endpoint. Seguem abaixo telas como guia:
 
-![tela1](https://github.com/digounet/desafio-dot-net/blob/master/pesquisa.PNG)
-![tela2](https://github.com/digounet/desafio-dot-net/blob/master/detalhes.PNG)
+![Pesquisa de filmes](https://github.com/digounet/desafio-dot-net/blob/master/pesquisa.png)
+![Detalhes do filme](https://github.com/digounet/desafio-dot-net/blob/master/detalhes.png)
 
 ### **O aplicativo deve contemplar** ###
 
@@ -11,7 +11,7 @@ Criar um site para consultar a API de Filmes e trazer os filmes enviados pelo en
     * Paginação na tela de lista.
     * Cada filme deve exibir Nome do filme e Foto do filme.
     * Ao clicar em um item da lista, deve levar ao detalhe do filme.
-- __Permitir pesquisar um filme__. Exemplo de chamada na API: `https://api.themoviedb.org/3/search/movie?api_key={api_key}&query=Jack+Reacher`.
+- __Permitir pesquisar um filme de forma assíncrona__. Exemplo de chamada na API: `https://api.themoviedb.org/3/search/movie?api_key={api_key}&query=Jack+Reacher`.
 - __Detalhes de um filme__. Exemplo de chamada na API: `https://api.themoviedb.org/3/movie/343611?api_key={api_key}`.
     * O item de detalhe deve exibir Nome, Foto e Descrição do filme.
 
@@ -22,6 +22,8 @@ Criar um site para consultar a API de Filmes e trazer os filmes enviados pelo en
 * Implementar em .Net Core e C#
 * O site deve ser diagramado em bootstrap
 * A pesquisa de filmes deve ser feita de forma assíncrona
+* A listagem deve conter uma paginação
+* caso utilize a biblioteca dattatables, a pesquisa não deve ser realizada com o padrão do componente
 
 ### **Desejável** ###
 
@@ -35,6 +37,7 @@ Nesta seção sugerimos algumas bibliotecas para o uso, mas fique à vontade par
 * Automapper
 * MediatR
 * FluentValidation
+* Datatables
 
 ### **OBS** ###
 
