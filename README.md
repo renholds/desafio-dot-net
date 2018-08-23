@@ -20,6 +20,8 @@ Criar um site para consultar a API de Filmes e trazer os filmes enviados pelo en
 * O projeto deve ser estruturado em camadas (onion architecture)
 * O projeto WEB deve ser feito em MVC
 * Implementar em .Net Core e C#
+* O site deve ser diagramado em bootstrap
+* A pesquisa de filmes deve ser feita de forma assíncrona
 
 ### **Desejável** ###
 
