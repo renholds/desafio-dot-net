@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace TMDB.Application.Entity
+namespace TMDB.UI.Web.Models
 {
-    public class FilmeLista
+    public class FilmeModelLista
     {
-        public List<Filme> Results { get; set; }
+        public List<FilmeModel> Results { get; set; }
     }
 
-    public class Filme
+    public class FilmeModel
     {
         public int Id { get; set; }
         public string Title { get; set; }

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using TMDB.UI.Web.Models;
+using TMDB.Application.Entity;
+using AutoMapper;
+
 
 namespace TMDB.UI.Web.Controllers
 {
@@ -32,6 +35,13 @@ namespace TMDB.UI.Web.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult Details(int id)
+        {
+            var filme = this.Details(id);
+            FilmeModelLista filmeModelLista = Mapper.Map<FilmeModelLista>(filme);
+            return View(filmeModelLista);
         }
     }
 }
