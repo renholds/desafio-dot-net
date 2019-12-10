@@ -2,12 +2,7 @@
 using System.Collections.Generic;
 
 namespace TMDB.Application.Entity
-{
-    public class FilmeLista
-    {
-        public List<Filme> Results { get; set; }
-    }
-
+{ 
     public class Filme
     {
         public int Id { get; set; }
@@ -22,5 +17,13 @@ namespace TMDB.Application.Entity
         public string Status { get; set; }
         public double Vote_count { get; set; }
         public string Vote_average { get; set; }
+    }
+
+    public class FilmeLista
+    {
+        public int Page { get; set; }
+        public List<Filme> results { get; set; }
+        public int Total_results { get; set; }
+        public int Total_pages { get; set; }
     }
 }

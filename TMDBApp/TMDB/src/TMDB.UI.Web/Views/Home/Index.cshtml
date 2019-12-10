@@ -1,18 +1,90 @@
-﻿@{
-    ViewData["Title"] = "Lista de Filmes";
-}
-
-@*<h2>Minha Lista de Filmes</h2>*@
+﻿
+@model TMDB.UI.Web.Models.FilmeModelLista
 <div class="text-center">
-    <h1 class="display-4">Lista de Filmes</h1>
+    <h1 class="display-4">Filmes Populares</h1>
 </div>
 <div id="body">
     @Html.Hidden("stringSearch")
     @Html.Hidden("page")
+
+    <table id="tableFilmes">
+        <thead>
+        <th>
+            @foreach (var filme in Model.results)
+            {
+                var urlImage = "https://image.tmdb.org/t/p/w500" + filme.Poster_path;
+            <tr>
+                <td style="width:15%">
+                    <img src=" @urlImage" width="50%" />
+                </td>
+                <td>
+                    <div class="col-sm-12" style="margin-top:40px">
+                        @Html.ActionLink("Consulta", "Consulta", new { id = filme.Id }, new { @class = "btn btn-primary" })
+                    </div>
+                    <div class="col-sm-6" style="font-size: large;">
+                        <strong>
+                            Título:
+                        </strong>
+                        <span>
+                            @filme.Title (@filme.Original_title)
+                        </span>
+                    </div>
+                    <div class="col-sm-6" style="font-size: large;">
+                        <strong>
+                            Classificação:
+                        </strong>
+                        <span>
+                            @filme.Vote_average
+                        </span>
+                    </div>
+                    <div class="col-sm-6" style="font-size: large;">
+                        <strong>
+                            Quantidade de Votos:
+                        </strong>
+                        <span>
+                            @filme.Vote_count
+                        </span>
+                    </div>
+                    <div class="col-sm-6" style="font-size: large;">
+                        <strong>
+                            Popularidade:
+                        </strong>
+                        <span>
+                            @filme.Popularity
+                        </span>
+                    </div>
+                    <div class="col-sm-6" style="font-size: large;">
+                        <strong>
+                            Idioma:
+                        </strong>
+                        <span>
+                            @filme.Original_language
+                        </span>
+
+                    </div>
+
+                    <div class="col-sm-12" style="margin-top:40px">
+                        @Html.ActionLink("Detalhes", "Filme", new { id = filme.Id }, new { @class = "btn btn-primary" })
+                    </div>
+                </td>
+            </tr>
+        }
+            </th>
+            </thead>
+            <tr>
+                <td></td>
+            </tr>
+        </table>
 </div>
 
-
-    @*<div class="text-center">
-            <h1 class="display-4">Welcome</h1>
-            <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-        </div>*@
+@section Scripts {
+    <script>
+        $('#table').DataTable({
+            //"ordering": false,
+            //"pagingType": "numbers",
+            //"searching": false,
+            //"info": false,
+            //"bLengthChange": false,
+        });
+    </script>
+}

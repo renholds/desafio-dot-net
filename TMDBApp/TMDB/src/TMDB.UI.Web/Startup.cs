@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using TMDB.Application.Services;
+using TMDB.UI.Web.Mappers;
 
 namespace TMDB.UI.Web
 {
@@ -24,6 +26,9 @@ namespace TMDB.UI.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddSingleton<FilmeService>();
+            services.AddSingleton<ApiService>();
+            services.AddSingleton<AutoMapperConfig>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

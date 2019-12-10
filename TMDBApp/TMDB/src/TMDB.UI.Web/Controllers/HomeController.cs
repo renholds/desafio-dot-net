@@ -8,22 +8,25 @@ using Microsoft.Extensions.Logging;
 using TMDB.UI.Web.Models;
 using TMDB.Application.Entity;
 using AutoMapper;
+using TMDB.Application.Services;
+using TMDB.UI.Web.Mappers;
 
 
 namespace TMDB.UI.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private FilmeService filmeService;
+        private AutoMapperConfig autoMap;
+        public HomeController(FilmeService filmeService, AutoMapperConfig autoMap)
         {
-            _logger = logger;
+            this.filmeService = filmeService;
+            this.autoMap = autoMap;
         }
 
         public IActionResult Index()
         {
-            return View();
+            return FilmesPopulares();//View();
         }
 
         public IActionResult Privacy()
@@ -37,11 +40,30 @@ namespace TMDB.UI.Web.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult Details(int id)
+        [HttpGet]
+        public IActionResult Filme(int id)
         {
-            var filme = this.Details(id);
-            FilmeModelLista filmeModelLista = Mapper.Map<FilmeModelLista>(filme);
-            return View(filmeModelLista);
+            var filme = filmeService.Details(id);
+            IMapper iMapper = autoMap.Configure().CreateMapper();
+            FilmeModel filmeMod = iMapper.Map<FilmeModel>(filme); //Mapper.Map<FilmeModel>(filme);
+            return View(filmeMod);
         }
+
+        [HttpGet]
+        public IActionResult FilmesPopulares()
+        {
+            var Listafilmes = filmeService.LoadMovies();
+            IMapper iMapper = autoMap.Configure().CreateMapper();
+            FilmeModelLista FilmeLista  = iMapper.Map<FilmeModelLista>(Listafilmes);
+            return View(FilmeLista);
+        }
+
+        //public async Task<IActionResult> VisualizacaoParcial()
+        //{
+        //    var Listafilmes = filmeService.LoadMovies();
+        //    IMapper iMapper = autoMap.Configure().CreateMapper();
+        //    FilmeModelLista FilmeLista = iMapper.Map<FilmeModelLista>(Listafilmes);
+        //    return PartialView("VisualizacaoParcial", moviesModel.results.ToPagedList(1, 5));
+        //}
     }
 }
