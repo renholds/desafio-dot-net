@@ -1,90 +1,106 @@
-﻿
-@model TMDB.UI.Web.Models.FilmeModelLista
-<div class="text-center">
-    <h1 class="display-4">Filmes Populares</h1>
-</div>
-<div id="body">
-    @Html.Hidden("stringSearch")
-    @Html.Hidden("page")
+﻿@model TMDB.UI.Web.Models.FilmeModelLista
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Filmes</title>
+</head>
+<body>
+    <div id="body">
+        @Html.Hidden("query")
+        <div class="text-center">
+            <h1 class="display-4">Filmes Populares</h1>
+        </div>
+        <div class="container">
+            <input id="campoConsulta" type="search" class="form-control" placeholder="Título do filme">
+            <button type="button" class="btn btn-primary" id="vai" onclick="runBabyRun()">Pesquisar</button>
+        </div>
+        <table id="tableFilmes">
+            <thead>
+                @foreach (var filme in Model.results)
+                {
+                    var urlImage = "https://image.tmdb.org/t/p/w500" + filme.Poster_path;
+                    <tr>
+                        <td style="width:20">
+                            <img src=" @urlImage" width="60%" />
+                        </td>
+                        <td>
+                            <div class="col-md-4" style="font-size: large;">
+                                <strong>
+                                    Título:
+                                </strong>
+                                <span>
+                                    @filme.Title (@filme.Original_title)
+                                </span>
+                            </div>
+                            <div class="col-md-4" style="font-size: large;">
+                                <strong>
+                                    Classificação:
+                                </strong>
+                                <span>
+                                    @filme.Vote_average
+                                </span>
+                            </div>
+                            <div class="col-md-4" style="font-size: large;">
+                                <strong>
+                                    Quantidade de Votos:
+                                </strong>
+                                <span>
+                                    @filme.Vote_count
+                                </span>
+                            </div>
+                            <div class="col-md-4" style="font-size: large;">
+                                <strong>
+                                    Popularidade:
+                                </strong>
+                                <span>
+                                    @filme.Popularity
+                                </span>
+                            </div>
+                            <div class="col-md-4" style="font-size: large;">
+                                <strong>
+                                    Idioma:
+                                </strong>
+                                <span>
+                                    @filme.Original_language
+                                </span>
+                            </div>
 
-    <table id="tableFilmes">
-        <thead>
-        <th>
-            @foreach (var filme in Model.results)
-            {
-                var urlImage = "https://image.tmdb.org/t/p/w500" + filme.Poster_path;
-            <tr>
-                <td style="width:15%">
-                    <img src=" @urlImage" width="50%" />
-                </td>
-                <td>
-                    <div class="col-sm-12" style="margin-top:40px">
-                        @Html.ActionLink("Consulta", "Consulta", new { id = filme.Id }, new { @class = "btn btn-primary" })
-                    </div>
-                    <div class="col-sm-6" style="font-size: large;">
-                        <strong>
-                            Título:
-                        </strong>
-                        <span>
-                            @filme.Title (@filme.Original_title)
-                        </span>
-                    </div>
-                    <div class="col-sm-6" style="font-size: large;">
-                        <strong>
-                            Classificação:
-                        </strong>
-                        <span>
-                            @filme.Vote_average
-                        </span>
-                    </div>
-                    <div class="col-sm-6" style="font-size: large;">
-                        <strong>
-                            Quantidade de Votos:
-                        </strong>
-                        <span>
-                            @filme.Vote_count
-                        </span>
-                    </div>
-                    <div class="col-sm-6" style="font-size: large;">
-                        <strong>
-                            Popularidade:
-                        </strong>
-                        <span>
-                            @filme.Popularity
-                        </span>
-                    </div>
-                    <div class="col-sm-6" style="font-size: large;">
-                        <strong>
-                            Idioma:
-                        </strong>
-                        <span>
-                            @filme.Original_language
-                        </span>
-
-                    </div>
-
-                    <div class="col-sm-12" style="margin-top:40px">
-                        @Html.ActionLink("Detalhes", "Filme", new { id = filme.Id }, new { @class = "btn btn-primary" })
-                    </div>
-                </td>
-            </tr>
-        }
-            </th>
+                            <div class="col-sm-10" style="margin-top:40px">
+                                @Html.ActionLink("Detalhes", "Filme", new { id = filme.Id }, new { @class = "btn btn-primary" })
+                            </div>
+                        </td>
+                    </tr>
+                }
             </thead>
-            <tr>
-                <td></td>
-            </tr>
         </table>
-</div>
+    </div>
+</body>
+</html>
+    @section Scripts {
+        <script>
+            $('#tableFilmes').DataTable({
+                "ordering": false,
+                "pagingType": "numbers",
+                "searching": false,
+                "info": false,
+                "bLengthChange": false,
+            });
+        </script>
 
-@section Scripts {
-    <script>
-        $('#table').DataTable({
-            //"ordering": false,
-            //"pagingType": "numbers",
-            //"searching": false,
-            //"info": false,
-            //"bLengthChange": false,
-        });
-    </script>
-}
+        <script type="text/javascript">
+            //debugger;
+            function runBabyRun() {
+                var campoConsulta = $('#campoConsulta').val();
+                $('#query').val(campoConsulta);
+                $.ajax({
+                    type: "Post",
+                    data: { query: campoConsulta },
+                    url: "/Home/Consulta",
+                    success: function (data) {
+                        $('#tableFilmes').html(data);
+                    }
+                });
+            }
+        </script>
+    }

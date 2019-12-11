@@ -1,37 +1,40 @@
 ﻿@model TMDB.UI.Web.Models.FilmeModel
-
-@{
-    Layout = null;
-}
-
 <!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Filmes</title>
 </head>
 <body>
-    <div>
-        <h4>Título: @Model.Title Data de lançamento: @Model.Release_date</h4>
-        <hr />
-        <dl class="row">
-        </dl>
+    <div id="body">
+        @{
+            var urlImage = "https://image.tmdb.org/t/p/w500" + @Model.Poster_path;
+            <div class="col-xs-8 col-sm-6">
+                <img src=" @urlImage" width="50%" />
+            </div>
+            <div>
+                <h4>@Model.Title</h4>
+                <h4>Data de lançamento: @Model.Release_date</h4>
+                <hr />
+                <dl class="row">
+                </dl>
+            </div>
+            <div>
+                <h4>Popularidade @Model.Popularity</h4>
+                <hr />
+                <dl class="row">
+                </dl>
+            </div>
+            <div>
+                <h4>Sinopse: @Model.Overview</h4>
+                <hr />
+                <dl class="row">
+                </dl>
+            </div>
+            <div>
+                <a asp-action="Index">Voltar para a página inicial</a>
+            </div>
+        }
     </div>
-    <div>
-        <h4>Popularidade @Model.Popularity</h4>
-        <hr />
-        <dl class="row">
-        </dl>
-    </div>
-    <div>
-        <h4>Sinopse: @Model.Overview</h4>
-        <hr />
-        <dl class="row">
-        </dl>
-    </div>
-<div>
-    <a asp-action="Index">Voltar para a página inicial</a>
-</div>
 </body>
 </html>

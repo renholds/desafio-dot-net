@@ -21,9 +21,15 @@ namespace TMDB.Application.Services
             return filme;
         }
 
-        public object LoadMovies()
+        public object LoadPopularMovies()
         {
             FilmeLista filmes = JsonConvert.DeserializeObject<FilmeLista>(apiServ.GetPopularMovies());
+            return filmes;
+        }
+
+        public object Search(string query)
+        {
+            FilmeLista filmes = JsonConvert.DeserializeObject<FilmeLista>(apiServ.SearchMovies(query));
             return filmes;
         }
     }

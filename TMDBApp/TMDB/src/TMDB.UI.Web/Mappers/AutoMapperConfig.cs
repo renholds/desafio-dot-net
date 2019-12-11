@@ -18,14 +18,6 @@ namespace TMDB.UI.Web.Mappers
             });
             return config;
         }
-        //public MapperConfiguration Configure()
-        //{
-        //    var config = new MapperConfiguration(cfg =>
-        //    {
-        //        cfg.CreateMap<Filme, FilmeModel>();
-        //    });
-        //    return config;
-        //}
     }
 
     public class FilmeMappingProfile : Profile
@@ -36,12 +28,4 @@ namespace TMDB.UI.Web.Mappers
             CreateMap<FilmeLista, FilmeModelLista>().ReverseMap();
         }
     }
-
-    //public class FilmeMappingProfile : Profile
-    //{
-    //    public FilmeMappingProfile()
-    //    {
-    //        CreateMap<Filme, FilmeModel>().ReverseMap();
-    //    }
-    //}
 }

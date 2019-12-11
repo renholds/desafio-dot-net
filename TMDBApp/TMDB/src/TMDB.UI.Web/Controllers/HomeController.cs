@@ -24,9 +24,15 @@ namespace TMDB.UI.Web.Controllers
             this.autoMap = autoMap;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(FilmeModelLista FilmeLista)
         {
-            return FilmesPopulares();//View();
+            if (FilmeLista.results == null){
+                return FilmesPopulares();//View();
+            }
+            else
+            {
+                return View();
+            }
         }
 
         public IActionResult Privacy()
@@ -52,18 +58,21 @@ namespace TMDB.UI.Web.Controllers
         [HttpGet]
         public IActionResult FilmesPopulares()
         {
-            var Listafilmes = filmeService.LoadMovies();
+            var Listafilmes = filmeService.LoadPopularMovies();
             IMapper iMapper = autoMap.Configure().CreateMapper();
-            FilmeModelLista FilmeLista  = iMapper.Map<FilmeModelLista>(Listafilmes);
+            FilmeModelLista FilmeLista = iMapper.Map<FilmeModelLista>(Listafilmes);
             return View(FilmeLista);
         }
 
-        //public async Task<IActionResult> VisualizacaoParcial()
-        //{
-        //    var Listafilmes = filmeService.LoadMovies();
-        //    IMapper iMapper = autoMap.Configure().CreateMapper();
-        //    FilmeModelLista FilmeLista = iMapper.Map<FilmeModelLista>(Listafilmes);
-        //    return PartialView("VisualizacaoParcial", moviesModel.results.ToPagedList(1, 5));
-        //}
+        //[HttpGet]
+        [HttpPost("Consulta")]
+        [Route("/Home/Consulta")]
+        public IActionResult Consulta(string query)
+        {
+            var Listafilmes = filmeService.Search(query);
+            IMapper iMapper = autoMap.Configure().CreateMapper();
+            FilmeModelLista FilmeLista = iMapper.Map<FilmeModelLista>(Listafilmes);
+            return View("Index", FilmeLista);
+        }
     }
 }
